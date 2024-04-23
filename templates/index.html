@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PDF</title>
+  </head>
+  <body>
+    <h1>Suba el PDF</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="pdf" required><br><br>
+      <label for="keyword">Ingrese la palabra a buscar:</label>
+      <input type="text" id="keyword" name="keyword" required><br><br>
+      <button type="submit">Buscar</button>
+    </form>    
+
+    {% if context_matches %}
+      <h2>Matches:</h2>
+      <ul>
+        {% for start_index, context in context_matches %}
+          <li>{{ context }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </body>
+</html>

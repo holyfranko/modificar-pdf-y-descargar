@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search Results</title>
+</head>
+<body>
+  <h1>Resultados e la busqueda</h1>
+  <p>Selecciona el resultado a modificar:</p>
+  <form method="POST" action="/search_results/{{ selected_index }}" enctype="multipart/form-data">
+    <input type="file" name="pdf" style="display: none;" value="{{ pdf_file }}">
+    <input type="hidden" name="selected_index" value="{{ selected_index }}">
+    <input type="hidden" name="context_matches" value="{{ context_matches|tojson }}">
+    <ul>
+      {% for context_match in context_matches %}
+        <li>
+          <input type="radio" name="selected_index" id="result{{ loop.index }}" value="{{ loop.index }}" required>
+          <label for="result{{ loop.index }}">{{ context_match['context'] }}</label>
+        </li>
+      {% endfor %}
+    </ul>
+    <label for="new_text">Ingresa el nuevo texto:</label>
+    <input type="text" id="new_text" name="new_text" required>
+    <button type="submit">Descargar PDF modificado</button>
+  </form>  
+  
+</body>
+</html>
